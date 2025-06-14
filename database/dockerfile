@@ -2,8 +2,16 @@ FROM mysql:5.7
 
 WORKDIR /var/lib/mysql
 
-ENV MYSQL_ROOT_PASSWORD=minhaSenha
-ENV MYSQL_DATABASE=meubanco
+COPY .env /tmp/.env
+
+RUN export $(cat /tmp/.env | xargs) && \
+	echo "Environment variables sourced from .env file"
+
+ARG DB_PASSWORD
+ARG DB_NAME
+
+ENV MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+ENV MYSQL_DATABASE=${DB_NAME}
 
 ADD sql.sql /docker-entrypoint-initdb.d
 

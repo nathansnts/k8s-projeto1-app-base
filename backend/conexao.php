@@ -1,8 +1,8 @@
 <?php
-$servername = "mysql-service";
-$username = "root";
-$password = "Senha123";
-$database = "meubanco";
+$servername = getenv('SERVER_NAME');
+$username = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
+$database = getenv('DB_NAME');
 
 // Criar conexão
 
